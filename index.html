@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Retos Matemáticos PRO+</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#07111a,#0f2027,#203a43);
+color:white;
+overflow-x:hidden;
+}
+
+/* HEADER */
+
+header{
+padding:60px 20px 30px;
+text-align:center;
+}
+
+header h1{
+font-size:42px;
+color:#00e5ff;
+
+text-shadow:
+0 0 5px #00e5ff,
+0 0 15px #00e5ff,
+0 0 30px #00e5ff;
+}
+
+header p{
+margin-top:10px;
+font-size:22px;
+}
+
+/* TARJETAS */
+
+.contenedor{
+width:90%;
+margin:auto;
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:25px;
+
+padding-bottom:60px;
+}
+
+.tarjeta{
+background:rgba(255,255,255,0.08);
+padding:25px;
+border-radius:25px;
+transition:0.4s;
+
+box-shadow:
+0 0 10px rgba(0,229,255,0.2);
+
+text-align:center;
+}
+
+.tarjeta:hover{
+
+transform:translateY(-8px);
+
+box-shadow:
+0 0 20px #00e5ff,
+0 0 40px #00e5ff;
+
+}
+
+.tarjeta h2{
+font-size:30px;
+margin-bottom:15px;
+color:#00e5ff;
+}
+
+.tarjeta p{
+font-size:18px;
+margin-bottom:20px;
+}
+
+button{
+padding:14px 28px;
+border:none;
+border-radius:15px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+background:#00e5ff;
+color:black;
+
+box-shadow:
+0 0 10px #00e5ff,
+0 0 20px #00e5ff;
+
+margin:5px;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+/* PANEL */
+
+#juego{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.96);
+
+display:none;
+
+justify-content:center;
+align-items:center;
+flex-direction:column;
+
+padding:20px;
+
+z-index:9999;
+
+text-align:center;
+
+}
+
+#pregunta{
+margin-bottom:20px;
+}
+
+#respuesta{
+
+padding:15px;
+font-size:25px;
+border:none;
+border-radius:15px;
+text-align:center;
+width:300px;
+
+}
+
+/* CUADROS */
+
+.casilla{
+
+background:#00e5ff;
+
+height:90px;
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+font-size:35px;
+
+color:black;
+font-weight:bold;
+
+border-radius:10px;
+
+}
+
+input[type=number]{
+
+height:90px;
+font-size:35px;
+text-align:center;
+
+border:none;
+border-radius:10px;
+
+}
+
+/* FOOTER */
+
+footer{
+
+text-align:center;
+
+padding:30px;
+
+font-size:45px;
+
+color:red;
+
+font-weight:bold;
+
+text-shadow:
+0 0 10px red,
+0 0 20px red;
+
+}
+
+/* ADMIN */
+
+#adminPanel{
+
+display:none;
+
+position:fixed;
+
+top:20px;
+right:20px;
+
+background:#111;
+
+padding:20px;
+
+border-radius:20px;
+
+border:2px solid #00e5ff;
+
+z-index:10000;
+
+}
+
+#adminPanel h3{
+
+color:#00e5ff;
+margin-bottom:10px;
+
+}
+
+/* BOTON REGLAS */
+
+#botonReglas{
+
+position:fixed;
+
+bottom:25px;
+right:25px;
+
+width:85px;
+height:85px;
+
+border-radius:50%;
+
+background:#00e5ff;
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+font-weight:bold;
+font-size:18px;
+
+color:black;
+
+cursor:pointer;
+
+z-index:99999;
+
+box-shadow:
+0 0 15px #00e5ff,
+0 0 35px #00e5ff;
+
+animation:flotar 2s infinite ease-in-out;
+
+}
+
+/* PANEL REGLAS */
+
+#panelReglas{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.92);
+
+display:none;
+
+justify-content:center;
+align-items:center;
+
+z-index:999999;
+
+padding:20px;
+
+}
+
+#contenidoReglas{
+
+background:#10232e;
+
+padding:35px;
+
+border-radius:25px;
+
+max-width:650px;
+
+width:100%;
+
+text-align:left;
+
+box-shadow:
+0 0 20px #00e5ff,
+0 0 40px #00e5ff;
+
+}
+
+#contenidoReglas h2{
+
+text-align:center;
+
+margin-bottom:25px;
+
+color:#00e5ff;
+
+font-size:35px;
+
+}
+
+#contenidoReglas li{
+
+margin-bottom:15px;
+
+font-size:22px;
+
+}
+
+@keyframes flotar{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+@media(max-width:700px){
+
+header h1{
+font-size:30px;
+}
+
+button{
+font-size:17px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>
+INSTITUCIÓN EDUCATIVA <br>
+PRESBÍTERO ANTONIO BERNAL
+</h1>
+
+<p>
+Aprende • Practica • Domina
+</p>
+
+</header>
+
+<div class="contenedor">
+
+<div class="tarjeta">
+<h2>➖ Enteros</h2>
+<p>Números positivos y negativos</p>
+<button onclick="abrirModo('enteros')">
+Entrar
+</button>
+</div>
+
+<div class="tarjeta">
+<h2>📏 Pitágoras</h2>
+<p>Triángulos matemáticos</p>
+<button onclick="abrirModo('pitagoras')">
+Entrar
+</button>
+</div>
+
+<div class="tarjeta">
+<h2>🍕 Fracciones</h2>
+<p>Fracciones visuales</p>
+<button onclick="abrirModo('fracciones')">
+Entrar
+</button>
+</div>
+
+<div class="tarjeta">
+<h2>📊 Porcentajes</h2>
+<p>Aprende porcentajes</p>
+<button onclick="abrirModo('porcentajes')">
+Entrar
+</button>
+</div>
+
+<div class="tarjeta">
+<h2>💸 Descuentos</h2>
+<p>Calcula descuentos</p>
+<button onclick="abrirModo('descuentos')">
+Entrar
+</button>
+</div>
+
+<div class="tarjeta">
+<h2>🔢 Cuadro mágico</h2>
+<p>Completa el cuadro</p>
+<button onclick="abrirModo('cuadrados')">
+Entrar
+</button>
+</div>
+
+<div class="tarjeta">
+<h2>🧩 Sudoku</h2>
+<p>Completa el número</p>
+<button onclick="abrirModo('sudoku')">
+Entrar
+</button>
+</div>
+
+</div>
+
+<footer>
+🔥 by Nicc 🔥
+</footer>
+
+<!-- ADMIN -->
+
+<div id="adminPanel">
+
+<h3>ADMIN PANEL</h3>
+
+<button onclick="resetearPuntos()">
+Resetear puntos
+</button>
+
+<button onclick="cerrarAdmin()">
+Cerrar admin
+</button>
+
+</div>
+
+<!-- PANEL JUEGO -->
+
+<div id="juego">
+
+<div id="pregunta"></div>
+
+<div id="respuestaContainer">
+
+<input
+id="respuesta"
+type="text"
+placeholder="Respuesta">
+
+</div>
+
+<br><br>
+
+<button onclick="verificarRespuesta()">
+Responder
+</button>
+
+<button onclick="siguiente()">
+Siguiente
+</button>
+
+<button onclick="cerrarJuego()">
+Cerrar
+</button>
+
+</div>
+
+<!-- BOTON FLOTANTE -->
+
+<div id="botonReglas" onclick="abrirReglas()">
+Reglas
+</div>
+
+<!-- PANEL REGLAS -->
+
+<div id="panelReglas">
+
+<div id="contenidoReglas">
+
+<h2>📜 REGLAS OFICIALES</h2>
+
+<ul>
+
+<li>✅ Máximo 2 personas por equipo</li>
+
+<li>❌ Prohibido usar calculadora</li>
+
+<li>❌ No se permite hacer trampa</li>
+
+<li>❌ No usar ChatGPT ni IA</li>
+
+<li>✅ Respetar a los demás jugadores</li>
+
+<li>✅ Solo respuestas hechas mentalmente</li>
+
+<li>❌ No copiar respuestas</li>
+
+<li>✅ El juez tiene la última decisión</li>
+
+<li>❌ No dañar equipos ni dispositivos</li>
+
+<li>✅ Jugar limpio y con respeto</li>
+
+</ul>
+
+<button onclick="cerrarReglas()">
+Cerrar
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+let modo = "";
+let respuestaCorrecta = 0;
+let puntos = 0;
+
+/* LOGIN ADMIN */
+
+const adminUser = "admin";
+const adminPassword = "nicoploit";
+
+document.addEventListener("keydown",function(e){
+
+if(e.key=="a"){
+
+let usuario =
+prompt("Usuario");
+
+let clave =
+prompt("Contraseña");
+
+if(
+usuario == adminUser &&
+clave == adminPassword
+){
+
+document.getElementById("adminPanel")
+.style.display = "block";
+
+alert("✅ Admin activado");
+
+}else{
+
+alert("❌ Datos incorrectos");
+
+}
+
+}
+
+});
+
+/* ADMIN */
+
+function resetearPuntos(){
+
+localStorage.setItem(
+"puntosMath",
+0
+);
+
+alert("Puntos reiniciados");
+
+}
+
+function cerrarAdmin(){
+
+document.getElementById("adminPanel")
+.style.display = "none";
+
+}
+
+/* ABRIR */
+
+function abrirModo(nombre){
+
+modo = nombre;
+
+document.getElementById("juego")
+.style.display = "flex";
+
+generarPregunta();
+
+}
+
+/* GENERAR */
+
+function generarPregunta(){
+
+let contenedor =
+document.getElementById("pregunta");
+
+let respuestaBox =
+document.getElementById("respuestaContainer");
+
+respuestaBox.style.display = "block";
+
+/* ENTEROS */
+
+if(modo=="enteros"){
+
+let a =
+Math.floor(Math.random()*40)-20;
+
+let b =
+Math.floor(Math.random()*40)-20;
+
+respuestaCorrecta = a+b;
+
+contenedor.innerHTML = `
+
+<div style="
+font-size:60px;
+color:#00e5ff;
+font-weight:bold;
+">
+${a} + (${b})
+</div>
+
+`;
+
+}
+
+/* PITAGORAS */
+
+if(modo=="pitagoras"){
+
+const pares = [
+[3,4,5],
+[5,12,13],
+[8,15,17],
+[7,24,25]
+];
+
+let r =
+pares[Math.floor(Math.random()*pares.length)];
+
+respuestaCorrecta = r[2];
+
+contenedor.innerHTML = `
+
+<div style="
+position:relative;
+width:260px;
+height:220px;
+margin:auto;
+">
+
+<div style="
+width:0;
+height:0;
+border-left:120px solid transparent;
+border-right:120px solid transparent;
+border-bottom:200px solid #00e5ff55;
+margin:auto;
+"></div>
+
+<div style="
+position:absolute;
+bottom:0;
+left:40px;
+font-size:30px;
+">
+${r[0]}
+</div>
+
+<div style="
+position:absolute;
+bottom:0;
+right:40px;
+font-size:30px;
+">
+${r[1]}
+</div>
+
+<div style="
+position:absolute;
+top:30px;
+left:110px;
+font-size:40px;
+color:#00e5ff;
+">
+?
+</div>
+
+</div>
+
+`;
+
+}
+
+/* FRACCIONES */
+
+if(modo=="fracciones"){
+
+let d =
+[2,4,5,8]
+[Math.floor(Math.random()*4)];
+
+let n1 =
+Math.floor(Math.random()*d)+1;
+
+let n2 =
+Math.floor(Math.random()*d)+1;
+
+respuestaCorrecta =
+(n1+n2)+"/"+d;
+
+contenedor.innerHTML = `
+
+<div style="
+display:flex;
+justify-content:center;
+align-items:center;
+gap:40px;
+font-size:50px;
+">
+
+<div>
+${n1}<br>―<br>${d}
+</div>
+
+<div style="
+font-size:70px;
+">
++
+</div>
+
+<div>
+${n2}<br>―<br>${d}
+</div>
+
+</div>
+
+`;
+
+}
+
+/* PORCENTAJES */
+
+if(modo=="porcentajes"){
+
+let porcentaje =
+[10,20,25,50]
+[Math.floor(Math.random()*4)];
+
+let numero =
+Math.floor(Math.random()*20+1)*10;
+
+respuestaCorrecta =
+(numero*porcentaje)/100;
+
+contenedor.innerHTML = `
+
+<h2 style="
+font-size:50px;
+">
+${porcentaje}% de ${numero}
+</h2>
+
+`;
+
+}
+
+/* DESCUENTOS */
+
+if(modo=="descuentos"){
+
+let descuento =
+[10,20,25,50]
+[Math.floor(Math.random()*4)];
+
+let precio =
+Math.floor(Math.random()*20+1)*100;
+
+respuestaCorrecta =
+precio-(precio*descuento/100);
+
+contenedor.innerHTML = `
+
+<div style="
+font-size:60px;
+">
+💲${precio}
+</div>
+
+<div style="
+font-size:70px;
+color:red;
+font-weight:bold;
+">
+-${descuento}%
+</div>
+
+`;
+
+}
+
+/* CUADRO MAGICO */
+
+if(modo=="cuadrados"){
+
+respuestaBox.style.display = "none";
+
+respuestaCorrecta =
+"8,1,6,3,5,7,4,9,2";
+
+contenedor.innerHTML = `
+
+<p style="
+font-size:25px;
+margin-bottom:20px;
+">
+Completa el cuadro mágico
+</p>
+
+<div style="
+display:grid;
+grid-template-columns:
+repeat(3,90px);
+gap:10px;
+justify-content:center;
+">
+
+<input id="c1" type="number">
+<input id="c2" type="number">
+<input id="c3" type="number">
+
+<input id="c4" type="number">
+<input id="c5" type="number">
+<input id="c6" type="number">
+
+<input id="c7" type="number">
+<input id="c8" type="number">
+<input id="c9" type="number">
+
+</div>
+
+`;
+
+}
+
+/* SUDOKU */
+
+if(modo=="sudoku"){
+
+respuestaBox.style.display = "none";
+
+respuestaCorrecta = 5;
+
+contenedor.innerHTML = `
+
+<div style="
+display:grid;
+grid-template-columns:
+repeat(3,90px);
+gap:5px;
+justify-content:center;
+">
+
+<div class="casilla">1</div>
+<div class="casilla">2</div>
+<div class="casilla">3</div>
+
+<div class="casilla">4</div>
+
+<input
+id="sudokuInput"
+type="number">
+
+<div class="casilla">6</div>
+
+<div class="casilla">7</div>
+<div class="casilla">8</div>
+<div class="casilla">9</div>
+
+</div>
+
+`;
+
+}
+
+}
+
+/* VERIFICAR */
+
+function verificarRespuesta(){
+
+if(modo=="cuadrados"){
+
+let r = [
+
+document.getElementById("c1").value,
+document.getElementById("c2").value,
+document.getElementById("c3").value,
+document.getElementById("c4").value,
+document.getElementById("c5").value,
+document.getElementById("c6").value,
+document.getElementById("c7").value,
+document.getElementById("c8").value,
+document.getElementById("c9").value
+
+].join(",");
+
+if(r == respuestaCorrecta){
+
+correcto();
+
+}else{
+
+incorrecto();
+
+}
+
+return;
+
+}
+
+if(modo=="sudoku"){
+
+let valor =
+document.getElementById("sudokuInput").value;
+
+if(valor == respuestaCorrecta){
+
+correcto();
+
+}else{
+
+incorrecto();
+
+}
+
+return;
+
+}
+
+let respuesta =
+document.getElementById("respuesta")
+.value;
+
+if(respuesta == respuestaCorrecta){
+
+correcto();
+
+}else{
+
+incorrecto();
+
+}
+
+}
+
+/* CORRECTO */
+
+function correcto(){
+
+puntos++;
+
+localStorage.setItem(
+"puntosMath",
+puntos
+);
+
+alert("🎉 Correcto");
+
+generarPregunta();
+
+}
+
+/* INCORRECTO */
+
+function incorrecto(){
+
+alert("❌ Incorrecto");
+
+generarPregunta();
+
+}
+
+/* SIGUIENTE */
+
+function siguiente(){
+
+generarPregunta();
+
+}
+
+/* CERRAR */
+
+function cerrarJuego(){
+
+document.getElementById("juego")
+.style.display = "none";
+
+}
+
+/* REGLAS */
+
+function abrirReglas(){
+
+document.getElementById("panelReglas")
+.style.display = "flex";
+
+}
+
+function cerrarReglas(){
+
+document.getElementById("panelReglas")
+.style.display = "none";
+
+}
+
+</script>
+
+</body>
+</html>
